@@ -1,0 +1,17 @@
+{
+  "name": "sk-science-android",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SK Science Android wrapper built with Capacitor",
+  "scripts": {
+    "android:sync": "npx cap sync android",
+    "android:open": "npx cap open android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.4.3",
+    "@capacitor/core": "^7.4.3"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.4.3"
+  }
+}
