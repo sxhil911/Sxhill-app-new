@@ -133,7 +133,7 @@ using (id = (select auth.uid()) or (select private.is_admin_user()));
 drop policy if exists "profiles update self safe fields" on public.profiles;
 create policy "profiles update self safe fields" on public.profiles for update to authenticated
 using (id = (select auth.uid()) and (select private.is_approved_user()))
-with check (id = (select auth.uid()) and (select private.is_approved_user()) and role = (select role from public.profiles p where p.id = (select auth.uid())) and approved = true);
+with check (id = (select auth.uid()) and (select private.is_approved_user()) and approved = true);
 
 drop policy if exists "approved users read courses" on public.courses;
 create policy "approved users read courses" on public.courses for select to authenticated
@@ -190,7 +190,8 @@ create policy "staff manage sessions" on public.class_sessions for all to authen
 using ((select private.is_staff_user()) and (created_by = (select auth.uid()) or (select private.is_admin_user())))
 with check ((select private.is_staff_user()) and created_by = (select auth.uid()));
 
-grant select, update on public.profiles to authenticated;
+grant select on public.profiles to authenticated;
+grant update (full_name) on public.profiles to authenticated;
 grant select, insert, update, delete on public.courses to authenticated;
 grant select, insert, update, delete on public.lessons to authenticated;
 grant select, insert, update, delete on public.enrollments to authenticated;
